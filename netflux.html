@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>TD</title>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="/js/is_connected.js"></script>
+</head>
+<body>
+    <form id="form-login" action="json/login.php" method="post" enctype="multipart/form-data">
+        <input type="text" name="username" placeholder="username">
+        <br>
+        <input type="password" name="password" placeholder="password">
+        <br>
+        <button type="submit"> Envoyer </button>
+        <br>
+    </form>
+    <div id="messages" style="display: none;">
+    </div>
+</body>
+</html>
