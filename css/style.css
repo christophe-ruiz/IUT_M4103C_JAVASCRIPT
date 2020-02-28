@@ -4,7 +4,7 @@
     src: url('../fonts/montserrat.ttf');
 }
 
-h1, h2, p, span, a, button {
+h1, h2, p, span, a, button, input, div {
     font-family: "Montserrat", sans-serif;
     text-decoration: none;
 }
@@ -43,9 +43,10 @@ html, body {
     border-radius: 5px;
     padding: 0.5vw 1vh;
     color: white;
-    background: #e50914;
+    background: #b60c17;
     text-transform: uppercase;
-    transition: 0.5s;
+    transition: 0.1s;
+    cursor: pointer;
 }
 
 .logButtons:hover {
@@ -58,20 +59,135 @@ html, body {
 
 #navbar {
     height: auto;
-    padding: 3vh;
+    padding: 3vh 3vw;
     display: flex;
     align-items: center;
 }
 
 #actions {
-    width: 20vw;
+    width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: center;
     padding-right: 3vw;
 }
 
+#actions :first-child {
+    margin-right: 3vw;
+}
+
+#sign-up-form-container, #sign-in-form-container {
+    background: #b60c17;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2vw 0;
+}
+
+#sign-up-form-container>h2, #sign-in-form-container>h2 {
+    color: white;
+    font-size: 3vw;
+    padding: 0;
+    margin: 0 0 1vw;
+}
+
 .logForm {
-    height: 10vw;
-    background: #e50914;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logForm>button {
+    width: 35vw;
+    height: 2.5vw;
+    border: solid white 2px;
+    border-radius: 5px;
+    color: white;
+    background: #101820;
+    transition: 0.1s;
+}
+
+.logForm>input {
+    width: 31vw;
+    padding: 1vw 2vw;
+    margin-bottom: 2vw;
+    border: white solid 2px;
+    border-radius: 5px;
+}
+
+.logForm>button:hover {
+    transition: 0.2s;
+    background: white;
+    border: solid #101820 3px;
+    color: #101820;
+}
+
+.presentation {
+    background: #101820;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.presentation>h1 {
+    font-size: 4vw;
+    width: 50%;
+    position: absolute;
+    color: #101820;
+    text-align: center;
+    text-shadow: 2px 0 0 white, -2px 0 0 white, 0 2px 0 white, 0 -2px 0 white,
+                 1px 1px white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
+
+}
+
+.presentation>img {
+    position: absolute;
+    height: 80%;
+    filter: blur(4px);
+}
+
+.alerts {
+    position: absolute;
+    padding: 0;
+    z-index: 999;
+    left: 50%;
+    top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.alerts :nth-child(1n) {
+    cursor: pointer;
+    position: relative;
+    left: -50%;
+    padding: 0.5vw;
+    font-size: 1vw;
+    border: solid 2px white;
+    border-radius: 25px;
+    margin-bottom: 0.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    background: #A50034;
+    color: white;
+}
+
+.info {
+    background: #F1B434;
+    color: white;
+}
+
+.success {
+    background: #7CCC6C;
+    color: white;
 }

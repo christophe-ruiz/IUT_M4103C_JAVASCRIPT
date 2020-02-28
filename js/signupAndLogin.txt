@@ -1,0 +1,21 @@
+(function () {
+    'use strict';
+    $(() => {
+        $('.action-form').on('submit', function () {
+            $.ajax({
+                url: $(this).attr('action'),
+                method: $(this).attr('method'),
+                data: $(this).serialize()
+            }).done(function (data) {
+                if (data.success === true) {
+                    window.location.href = '/netflux.html';
+                } else {
+                    $('.alerts').append($('<li class="error"> ' + data.message + ' </li>'));
+                }
+            }).fail(function () {
+                $('.alerts').append($('<li class="error"> Fatal error ! </li>'));
+            });
+            //return false;
+        })
+    })
+})();

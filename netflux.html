@@ -1,21 +1,41 @@
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <title>TD</title>
+    <meta charset="UTF-8">
+    <title>Netflux</title>
+    <meta name="description" content="Welcome to Netflux !">
+    <meta name="author" content="Christophe RUIZ">
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="/js/is_connected.js"></script>
+    <script src="js/signupAndLogin.js"></script>
+    <script src="js/showForms.js"></script>
+    <script src="js/is_connected.js"></script>
+    <script src="js/alerts.js"></script>
 </head>
 <body>
-    <form id="form-login" action="json/login.php" method="post" enctype="multipart/form-data">
-        <input type="text" name="username" placeholder="username">
-        <br>
-        <input type="password" name="password" placeholder="password">
-        <br>
-        <button type="submit"> Envoyer </button>
-        <br>
-    </form>
-    <div id="messages" style="display: none;">
+<div id="firstPanel">
+    <nav id="navbar">
+            <span id="logoContainer">
+                <img id="logo" src="img/logoNetflux.png" alt="">
+            </span>
+        <div id="actions">
+            <button class="logButtons" type="button" id="sign-up"> Sign up </button>
+            <button class="logButtons" type="button" id="sign-in"> Sign in </button>
+        </div>
+    </nav>
+
+    <div class="alerts">
     </div>
+
+    <div class="content">
+
+    </div>
+
+    <div class="presentation">
+        <img src="img/presentation.jpg" alt="">
+        <h1> Vous êtes connecté ! </h1>
+    </div>
+
+</div>
 </body>
 </html>

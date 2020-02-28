@@ -6,23 +6,29 @@
             method: 'get',
         }).done(function (data) {
             if (data.success) {
-                $('#actions').append(
-                    $('<button/>')
-                        .html('Déconnexion')
-                        .on('click', function () {
-                            $.ajax({
-                                url: '/json/logout.php',
-                                method: 'get'
-                            }).done(function () {
-                                window.location.href = '/index.html';
+                createAlert('success', data.message);
+                $('#actions')
+                    .empty()
+                    .append(
+                        $('<button class="logButtons" type="button" id="logout"/>')
+                            .html('Logout')
+                            .on('click', function () {
+                                $.ajax({
+                                    url: '/json/logout.php',
+                                    method: 'get'
+                                }).done(function () {
+
+                                    //$('.alerts').append($('<li class="success"> ' + data.message + ' </li>'));
+                                    window.location.assign('/index.html');
+                                })
                             })
-                        })
-                )
+                    );
             } else {
-                window.location.href = '/index.html';
+                window.location.assign('/index.html');
+                //$('.alerts').append($('<li class="error">' + data.message + '</li>'));
             }
         }).fail(function () {
-            $('body').html('Fatal error');
+            $('.alerts').append($('<li class="error"> Fatal error ! </li>'));
         });
     });
 })();

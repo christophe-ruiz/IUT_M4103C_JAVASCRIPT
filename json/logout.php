@@ -20,6 +20,7 @@ session_destroy();
 
 $obj = new stdClass();
 $obj -> success = true;
+$obj -> message = "You successfully disconnected !";
 
 header('Cache-Control: no-cache, must-revalidate');
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

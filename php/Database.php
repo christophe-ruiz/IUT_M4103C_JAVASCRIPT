@@ -3,16 +3,15 @@
 
 class Database
 {
-    private static $host = '91.216.107.164';
-    private static $db   = 'cruiz1237388';
-    private static $user = 'cruiz1237388';
-    private static $pass = 'bdni8pqery';
-    private static $charset = 'utf8mb4';
+    private $host = '91.216.107.164';
+    private $db   = 'cruiz1237388';
+    private $user = 'cruiz1237388';
+    private $pass = 'bdni8pqery';
+    private $charset = 'utf8mb4';
 
     private $pdo;
-
-    public function __construct()
-    {
+    function __construct() {
+        $dsn = 'mysql:host='. $this->host . ';dbname='. $this->db . ';charset='. $this->charset;
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -20,7 +19,7 @@ class Database
         ];
 
         try {
-            $this->pdo = new PDO("'mysql:host= " . Database::$host .  ";dbname= " . Database::$db .";charset= ". Database::$charset, Database::$user, Database::$pass, $options);
+            $this->pdo = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), (int)$e->getCode());
         }

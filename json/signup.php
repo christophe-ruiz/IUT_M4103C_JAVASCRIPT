@@ -1,25 +1,38 @@
 <?php
-    require_once '../php/Database.php';
-    session_start();
 
-    $obj = new stdClass();
-    $obj -> success = false;
-    $obj -> message = '';
 
-    $db = new Database();
+require_once '../php/Database.php';
+session_start();
 
-    try {
-        $stmt = $db
-            ->pdo()
-            ->prepare("INSERT INTO USR VALUES (" . $_POST['username'] . ', ' . $_POST['pwd'] . ", NOW(), FALSE)")
-            ->execute();
-        $obj->success = true;
-    } catch (mysqli_sql_exception $e) {
-        $e->getMessage();
-    }
+$obj = new stdClass();
+$obj -> success = false;
+$obj -> message = "Couldn't process registration, please retry in a few seconds.";
 
-    header('Cache-Control: no-cache, must-revalidate');
-    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-    header('Content-type: application/json');
+$db = new Database();
 
+$usr = $_POST['username'];
+$pwd = $_POST['pwd'];
+$mail = $_POST['mail'];
+
+if (!isset($usr) || !isset($pwd) || !isset($mail) ) {
     echo json_encode($obj);
+    return;
+}
+
+try {
+    $stmt = $db
+        -> pdo()
+        -> prepare("INSERT INTO USR VALUES ('$usr', '$pwd', '$mail', NOW(), FALSE)")
+        -> execute();
+    $obj -> success = true;
+    $obj -> message = 'Success !';
+    $_SESSION['user'] = $usr;
+} catch (mysqli_sql_exception $e) {
+    $obj -> message = $e -> getMessage();
+}
+
+header('Cache-Control: no-cache, must-revalidate');
+header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+header('Content-type: application/json');
+
+echo json_encode($obj);

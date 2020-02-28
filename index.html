@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <meta name="description" content="Welcome to X !">
+    <meta name="description" content="Join Netflux !">
     <meta name="author" content="Christophe RUIZ">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/signup.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/signupAndLogin.js"></script>
+    <script src="js/showForms.js"></script>
+    <script src="js/alerts.js"></script>
 </head>
 <body>
     <div id="firstPanel">
@@ -22,14 +23,32 @@
             </div>
         </nav>
 
-        <div class="logForm">
-            <form method="post" action="signup.php">
+        <ul class="alerts">
+        </ul>
+
+        <div id='sign-up-form-container'>
+            <h2> REGISTRATION </h2>
+            <form class="logForm" class="action-form" id="sign-up-form" action="json/signup.php" method="post" enctype="multipart/form-data">
+                <input type="text" name="username" placeholder="USERNAME">
+                <input type="password" name="pwd" placeholder="PASSWORD">
+                <input type="text" name="mail" placeholder="E-MAIL">
+                <button type="submit"> REGISTER </button>
             </form>
         </div>
 
-        <main class="corpse">
+        <div id='sign-in-form-container'>
+            <h2> LOGIN </h2>
+            <form class="logForm" class="action-form" id="sign-in-form" action="json/signin.php" method="post" enctype="multipart/form-data">
+                <input type="text" name="username" placeholder="USERNAME">
+                <input type="password" name="pwd" placeholder="PASSWORD">
+                <button type="submit"> LOGIN </button>
+            </form>
+        </div>
 
-        </main>
+        <div class="presentation">
+            <img src="img/presentation.jpg" alt="">
+            <h1> Films, séries TV et bien plus en illimité. </h1>
+        </div>
     </div>
 </body>
 </html>
