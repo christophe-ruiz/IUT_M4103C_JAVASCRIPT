@@ -15,6 +15,7 @@ foreach ($stmt as $row) {
         $obj->success = true;
         $obj->message = "Welcome " . $_POST['username'] . " !";
         $_SESSION['user'] = $_POST['username'];
+        $_SESSION['justLogged'] = true;
     }
 }
 

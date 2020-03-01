@@ -99,6 +99,43 @@ html, body {
     align-items: center;
 }
 
+#search-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#searchForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#search-form-container>h2 {
+    color: white;
+    margin: 0;
+}
+
+#searchForm>button {
+    height: 2.5vw;
+    font-size: 1vw;
+    border: solid white 2px;
+    border-radius: 0 5px 5px 0;
+    color: white;
+    background: #101820;
+    transition: 0.1s;
+}
+
+#searchForm>input {
+    height: 1.3vw;
+    width: 31vw;
+    padding: 0.5vw 1vw;
+    font-size: 1vw;
+    border: white solid 2px;
+    border-radius: 5px 0 0 5px;
+}
+
 .logForm>button {
     width: 35vw;
     height: 2.5vw;
@@ -122,6 +159,10 @@ html, body {
     background: white;
     border: solid #101820 3px;
     color: #101820;
+}
+#searchForm>button:hover {
+    transition: 0.2s;
+    background: #b60c17;
 }
 
 .presentation {
@@ -190,4 +231,60 @@ html, body {
 .success {
     background: #7CCC6C;
     color: white;
+}
+
+#results {
+    background: #333F48;
+    padding: 4vw 4vw 2vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#results :nth-child(1n) {
+    margin-bottom: 2vw;
+}
+
+.result {
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.cover-container {
+    position: relative;
+    height: 100%;
+    width: 10vw;
+}
+
+.cover-container>img {
+    height: 100%;
+    position: relative;
+}
+
+.movie-text {
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.title {
+    font-size: 4vw;
+}
+
+.description {
+    font-size: 0.5vw;
+}
+
+.more-info {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
 }

@@ -14,7 +14,7 @@
                 }
             }).fail(function () {
                 createAlert('error', 'Fatal error !');
-            })
+            });
             return false;
         })
     })

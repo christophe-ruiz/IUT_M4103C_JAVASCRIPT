@@ -27,6 +27,7 @@ try {
     $obj -> success = true;
     $obj -> message = 'Success !';
     $_SESSION['user'] = $usr;
+    $_SESSION['justLogged'] = true;
 } catch (mysqli_sql_exception $e) {
     $obj -> message = $e -> getMessage();
 }

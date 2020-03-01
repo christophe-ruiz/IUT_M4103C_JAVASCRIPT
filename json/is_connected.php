@@ -8,7 +8,11 @@ $obj -> message = "Please log in before trying to access Netflux.";
 
 if (isset($_SESSION['user'])) {
     $obj -> success = true;
-    $obj -> message = "Welcome " . $_SESSION['user'] . " !";
+    $obj -> message = "";
+    if ($_SESSION['justLogged']) {
+        unset($_SESSION['justLogged']);
+        $obj -> message = "Welcome " . $_SESSION['user'] . " !";
+    }
 }
 
 header('Cache-Control: no-cache, must-revalidate');

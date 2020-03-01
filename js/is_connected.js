@@ -6,7 +6,9 @@
             method: 'get',
         }).done(function (data) {
             if (data.success) {
-                createAlert('success', data.message);
+                if (data.message !== "") {
+                    createAlert('success', data.message);
+                }
                 $('#actions')
                     .empty()
                     .append(
