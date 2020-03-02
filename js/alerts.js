@@ -1,13 +1,27 @@
 let createAlert = function (type, msg) {
     'use strict';
     $('.alerts').append(
-        $('<div class="' + type + '"> ' + msg + ' </div>')
-            .css({
-                display: 'none'
-            })
+        $('<div class="' + type + '"/>')
+            .append(
+                $('<div/>')
+                    .html(msg)
+                    .css({
+                        cursor : 'default'
+                    }),
+                $('<span/>')
+                    .html('Close')
+                    .on('click', function () {
+                        $(this).parent().fadeOut(500);
+                    })
+                    .css({
+                        'font-weight' : 'bold',
+                        cursor : 'pointer',
+                        'padding-left' : '1vw',
+                        'margin-left' : '1vw',
+                        'border-left' : '2px solid rgba(255,255,255,0.5)'
+                    })
+            )
+            .hide()
             .fadeIn(1000)
-            .on('click', function () {
-                $(this).fadeOut(500);
-            })
     )
 };

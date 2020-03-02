@@ -31,6 +31,22 @@ class Movie {
         $('#results')
             .append(
                 $('<div class="result"/>')
+                    .on('click', function () {
+                        if (!$('#player-container').length) {
+                            $('.alerts')
+                                .after(
+                                    $('<div id="player-container"/>')
+                                );
+                        }
+                        $('#player-container')
+                            .empty()
+                            .append(
+                                    $('<div id="player" />')
+                                );
+                    })
+                    .css({
+                        cursor: 'pointer'
+                    })
                     .append(
                         $('<div class="cover-container"/>')
                             .append(

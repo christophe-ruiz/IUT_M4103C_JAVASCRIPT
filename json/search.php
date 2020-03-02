@@ -6,9 +6,10 @@ session_start();
 
 $obj = new stdClass();
 $obj -> results = [];
+$obj -> found = 0;
 
 $db = new Database();
-$stmt = $db->pdo()->query("SELECT * FROM VIDEOS WHERE TITLE LIKE '%" . $_POST['query'] . "%'");
+$stmt = $db->pdo()->query("SELECT * FROM VIDEOS WHERE TITLE LIKE '%" . $_POST['q'] . "%'");
 foreach ($stmt as $row) {
     $obj->results [] = array(
         "type" => $row['TYPE'],
@@ -18,6 +19,7 @@ foreach ($stmt as $row) {
         "year" => $row['YEAR'],
         "id" => $row['ID']
     );
+    $obj->found = ++$obj->found;
 }
 
 header('Cache-Control: no-cache, must-revalidate');

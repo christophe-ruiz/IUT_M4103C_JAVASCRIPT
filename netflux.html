@@ -32,19 +32,10 @@
 
     <div id='search-form-container'>
         <h2> SEARCH </h2>
-        <form id="searchForm" action="json/search.php" method="post" enctype="multipart/form-data">
-            <input type="text" name="query" placeholder="What are you looking for ?">
+        <form id="searchForm" action="json/search.php" method="get" enctype="multipart/form-data">
+            <input type="text" name="q" placeholder="What are you looking for ?">
             <button type="submit"> &#x1F50D; </button>
         </form>
-    </div>
-
-    <div id="results">
-
-    </div>
-
-    <div class="presentation">
-        <img src="img/presentation.jpg" alt="">
-        <h1> Connected ! </h1>
     </div>
 
 </div>
