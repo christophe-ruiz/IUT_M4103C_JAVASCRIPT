@@ -7,13 +7,19 @@
                 method: $(this).attr('method'),
                 data: $(this).serialize()
             }).done(function (data) {
-                $('#results').empty();
                 let howMuchItemsWeFound = 'Found ' + data.found;
-                if (data.found == 0) {
+                console.log(data);
+                if (data.message) {
+                    createAlert('error', data.message);
+                } else {
+                    $('#results').empty();
+                }
+
+                if (data.found === 0) {
                     howMuchItemsWeFound += ' result.';
                     createAlert('info', howMuchItemsWeFound)
                 } else {
-                    if (data.found == 1){
+                    if (data.found === 1){
                         howMuchItemsWeFound += ' result.';
                     } else {
                         howMuchItemsWeFound += ' results.';
@@ -24,36 +30,7 @@
                         )
                     }
                     createAlert('success', howMuchItemsWeFound);
-                    data.results.forEach(result => {
-                        if (result.type === 'MOVIE') {
-                            let movie = new Movie({
-                                name : result.name,
-                                type : result.type,
-                                author : result.author,
-                                description : result.description,
-                                year : result.year,
-                                id : result.id,
-                                ext : result.ext,
-                                covExt : result.covExt,
-                            });
-                            movie.show();
-                        } else if (result.type === 'SHOW') {
-                            let show = new Show({
-                                name : result.name,
-                                type : result.type,
-                                author : result.author,
-                                description : result.description,
-                                year : result.year,
-                                id : result.id,
-                                ext : result.ext,
-                                covExt : result.covExt
-                            });
-                            show.show();
-                        }
-                    })
-                }
-                if (data.message) {
-                    createAlert('error', data.message);
+                    data.results.forEach(result => Video.sortAndShow(result, '#results'))
                 }
             }).fail(function () {
                 createAlert('error', 'Sorry, the search function is unavailable for the moment.')

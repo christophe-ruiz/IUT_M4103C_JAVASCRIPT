@@ -1,6 +1,11 @@
 let createAlert = function (type, msg) {
     'use strict';
-    $('.alerts').append(
+    let a = $('.alerts');
+    let b = $('html, body');
+    b.animate({
+        scrollTop : b.offset().top
+    });
+    a.append(
         $('<div class="' + type + '"/>')
             .append(
                 $('<div/>')
