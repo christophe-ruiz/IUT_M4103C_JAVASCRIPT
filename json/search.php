@@ -9,7 +9,17 @@ $obj -> results = [];
 $obj -> found = 0;
 
 $db = new Database();
-$stmt = $db->pdo()->query("SELECT * FROM VIDEOS WHERE TITLE LIKE '%" . $_POST['q'] . "%'");
+
+if (empty($_GET['q'])) {
+    $obj -> message = "Try looking for something that actually exists.";
+    header('Cache-Control: no-cache, must-revalidate');
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+    header('Content-type: application/json');
+
+    echo json_encode($obj);
+}
+$stmt = $db->pdo()->query("SELECT * FROM VIDEOS WHERE TITLE LIKE '%" . $_GET['q'] . "%'");
+
 foreach ($stmt as $row) {
     $obj->results [] = array(
         "type" => $row['TYPE'],
@@ -17,7 +27,9 @@ foreach ($stmt as $row) {
         "author" => $row['AUTHOR'],
         "description" => $row['DESCRIPTION'],
         "year" => $row['YEAR'],
-        "id" => $row['ID']
+        "id" => $row['ID'],
+        "ext" => $row['EXTENSION'],
+        "covExt" => $row['COVEXT'],
     );
     $obj->found = ++$obj->found;
 }

@@ -10,6 +10,22 @@
           <option name="port" value="21" />
         </fileTransfer>
       </webServer>
+      <webServer id="e4934036-b5d6-4566-9aaa-fe2964101818" name="Netflux Alwaysdata" url="http://ssh-netflux.alwaysdata.net">
+        <fileTransfer host="ssh-netflux.alwaysdata.net" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="5385be55-318d-493c-a57e-330d5c56f7c0" name="Alwaysdata Net" url="http://ftp-netflux.alwaysdata.net">
+        <fileTransfer host="ftp-netflux.alwaysdata.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
     </option>
   </component>
 </project>

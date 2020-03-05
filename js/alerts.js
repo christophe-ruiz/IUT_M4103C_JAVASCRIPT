@@ -16,8 +16,8 @@ let createAlert = function (type, msg) {
                     .css({
                         'font-weight' : 'bold',
                         cursor : 'pointer',
-                        'padding-left' : '1vw',
-                        'margin-left' : '1vw',
+                        'padding-left' : '0.8vw',
+                        'margin-left' : '0.8vw',
                         'border-left' : '2px solid rgba(255,255,255,0.5)'
                     })
             )

@@ -1,3 +1,4 @@
-/content
-/covers
-/fonts
+/content/
+/covers/
+/fonts/
+/settings.json

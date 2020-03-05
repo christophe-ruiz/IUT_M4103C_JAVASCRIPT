@@ -27,6 +27,32 @@
         </div>
     </nav>
 
+    <div id="admin-panel">
+        <div class="admin-form-container">
+            <h2 class="admin-form-title">ADD CONTENT</h2>
+            <form id="upload-form" enctype="multipart/form-data" action="json/upload.php" method="post">
+                <label for="title">TITLE</label>
+                <input id="title" class="content-form" type="text" name="title" placeholder="ex: Star Wars">
+                <label for="author">AUTHOR</label>
+                <input id="author" class="content-form" type="text" name="author" placeholder="ex: George Lucas">
+                <label for="description">DESCPRIPTION</label>
+                <textarea class="content-form" id="description" name="description" placeholder="ex: A long time ago, in a galaxy far, far away..."></textarea>
+                <label for="year">YEAR</label>
+                <input id="year" class="content-form" type="text" name="year" placeholder="ex: 1977"><label for="type">TYPE</label>
+                <select id="type" class="content-form" name="type">
+                    <option value="MOVIE" selected> MOVIE </option>
+                    <option value="SHOW"> SHOW </option>
+                </select>
+                <label for="video">FILE</label>
+                <input id="video" class="content-form" type="file" name="video">
+                <label for="cover">COVER</label>
+                <input id="cover" class="content-form" type="file" name="cover">
+                <input id="upload-button" type="submit" name="submit" value="UPLOAD">
+            </form>
+        </div>
+    </div>
+
+
     <div class="alerts">
     </div>
 

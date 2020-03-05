@@ -4,8 +4,10 @@ class Movie {
         this.t = m.type;
         this.a = m.author;
         this.desc = m.description;
-        this.d = m.year;
+        this.y = m.year;
         this.c = m.id;
+        this.e = m.ext;
+        this.ce = m.covExt;
     }
     
     get name () {
@@ -21,13 +23,20 @@ class Movie {
         return this.desc;
     }
     get year () {
-        return this.d;
+        return this.y;
     }
     get id () {
         return this.c;
     }
+    get ext () {
+        return this.e;
+    }
+    get covExt () {
+        return this.ce;
+    }
 
     show () {
+        let self = this;
         $('#results')
             .append(
                 $('<div class="result"/>')
@@ -41,7 +50,16 @@ class Movie {
                         $('#player-container')
                             .empty()
                             .append(
-                                    $('<div id="player" />')
+                                    $('<video controls>')
+                                        .attr({
+                                            src : "/content/" + self.type + "/"+ self.id + "." + self.ext,
+                                            type : "video/" + self.ext
+                                        })
+                                        .css({
+                                            width : "60%",
+                                            border : 'solid 3px #101820'
+                                        })
+
                                 );
                     })
                     .css({
@@ -50,7 +68,7 @@ class Movie {
                     .append(
                         $('<div class="cover-container"/>')
                             .append(
-                                $('<img src="../covers/' + this.id + '.jpg" alt=""/>')
+                                $('<img src="../covers/' + this.id + '.' + this.covExt + '" alt=""/>')
                             ),
                         $('<div class="movie-text"/>')
                             .append(

@@ -9,13 +9,20 @@ $obj -> success = false;
 $obj -> message = "Couldn't log you in, please verify your credentials.";
 
 $db = new Database();
-$stmt = $db->pdo()->query("SELECT * FROM USR WHERE USERNAME = '" . $_POST['username'] . "'");
+$stmt = $db->pdo()->prepare(
+    "SELECT * ".
+    "FROM USR " .
+    "WHERE USERNAME = ?");
+$stmt->execute([$_POST['username']]);
+
 foreach ($stmt as $row) {
     if ($row['PASSWORD'] == $_POST['pwd']) {
         $obj->success = true;
         $obj->message = "Welcome " . $_POST['username'] . " !";
+        $_SESSION['admin'] = $row['IS_ADMIN'];
         $_SESSION['user'] = $_POST['username'];
         $_SESSION['justLogged'] = true;
+        break;
     }
 }
 

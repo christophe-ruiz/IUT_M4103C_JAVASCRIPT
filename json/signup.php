@@ -22,8 +22,12 @@ if (!isset($usr) || !isset($pwd) || !isset($mail) ) {
 try {
     $stmt = $db
         -> pdo()
-        -> prepare("INSERT INTO USR VALUES ('$usr', '$pwd', '$mail', NOW(), FALSE)")
-        -> execute();
+        -> prepare("INSERT INTO USR VALUES (?, ?, ?, NOW(), FALSE)")
+        -> execute([
+            $usr,
+            $pwd,
+            $mail
+        ]);
     $obj -> success = true;
     $obj -> message = 'Success !';
     $_SESSION['user'] = $usr;

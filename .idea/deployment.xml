@@ -2,6 +2,20 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="On explicit save action" serverName="Projet JS" autoUploadExternalChanges="true">
     <serverData>
+      <paths name="Alwaysdata Net">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/www" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Netflux Alwaysdata">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Projet JS">
         <serverdata>
           <mappings>

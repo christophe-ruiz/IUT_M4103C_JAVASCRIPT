@@ -13,6 +13,7 @@ if (isset($_SESSION['user'])) {
         unset($_SESSION['justLogged']);
         $obj -> message = "Welcome " . $_SESSION['user'] . " !";
     }
+    $obj -> is_admin = $_SESSION['admin'];
 }
 
 header('Cache-Control: no-cache, must-revalidate');

@@ -4,7 +4,7 @@
     src: url('../fonts/montserrat.ttf');
 }
 
-h1, h2, p, span, a, button, input, div {
+h1, h2, p, span, a, button, input, div, label, textarea {
     font-family: "Montserrat", sans-serif;
     text-decoration: none;
 }
@@ -130,6 +130,16 @@ html, body {
     transition: 0.1s;
 }
 
+#upload-button {
+    height: 2.5vw;
+    font-size: 1vw;
+    border: solid white 2px;
+    border-radius: 5px;
+    color: white;
+    background: #b60c17;
+    transition: 0.1s;
+}
+
 #searchForm>input {
     height: 1.3vw;
     width: 31vw;
@@ -166,6 +176,12 @@ html, body {
 #searchForm>button:hover {
     transition: 0.2s;
     background: #b60c17;
+}
+
+#upload-button:hover {
+    transition: 0.2s;
+    background: #101820;
+    cursor: pointer;
 }
 
 .presentation {
@@ -316,4 +332,56 @@ html, body {
     height: 40vw;
     width: 50vw;
     background: #F1B434;
+}
+
+#admin-panel {
+    width : 100%;
+    justify-content : center;
+    align-items : center;
+    background : #F1B434;
+    display: none;
+}
+
+.content-form {
+    height : 1.3vw;
+    width : 25vw;
+    padding : 0.5vw 1vw;
+    font-size : 1vw;
+    border : white solid 2px;
+    border-radius : 5px;
+    margin-bottom : 1vw;
+}
+
+select.content-form {
+    height: 3vw;
+    width: 100%;
+}
+
+textarea.content-form {
+    max-width: 25vw;
+    min-width: 25vw;
+    max-height: 10vw;
+}
+
+.admin-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #F1B434;
+}
+
+.admin-form-title {
+    color: white;
+    font-size: 4vw;
+    margin-top: 1vw;
+    margin-bottom: 0;
+}
+
+#upload-form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-end;
+    padding: 2.5vw;
 }
