@@ -1,16 +1,36 @@
-(function () {
-    $(()=>{
+(() => {
+    $(() => {
         $.ajax({
-            url: "../mostrecent.php",
+            url: "/json/mostrecent.php",
             method: "post",
         }).done(function (data) {
-            $('#search-form-container')
-                .after(
-                    $('<div id="most-recent"/>')
-                );
-            data.results.forEach( r => {
-                Video.sortAndShow(r, "#most-recent");
-            })
+            if (data.success) {
+                let title = $('<h1/>')
+                    .html('LATEST UPLOADS')
+                    .css({
+                        'color' : 'white',
+                        'font-size' : '5vw',
+                    })
+                $('#search-form-container')
+                    .after(
+                        $('<div id="most-recent"/>')
+                            .css({
+                                'display' : 'flex',
+                                'justify-content' : 'center',
+                                'align-items' : 'center',
+                                'flex-direction' : 'column',
+                                'background' : 'black'
+                            })
+                            .append(title)
+                    );
+                data.results.forEach( r => {
+                    Video.sortAndShow(r, "#most-recent");
+                })
+            } else {
+                createAlert('error', data.message);
+            }
+        }).fail(function () {
+            createAlert('error', 'Fatal Error !')
         })
     })
 })();

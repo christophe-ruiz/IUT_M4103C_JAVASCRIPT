@@ -10,7 +10,7 @@ class Database
     private $charset = 'utf8mb4';
 
     private $pdo;
-    function __construct() {
+    public function __construct() {
         $dsn = 'mysql:host='. $this->host . ';dbname='. $this->db . ';charset='. $this->charset;
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,

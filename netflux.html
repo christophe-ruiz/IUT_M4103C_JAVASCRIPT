@@ -12,12 +12,12 @@
     <script src="js/is_connected.js"></script>
     <script src="js/alerts.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/mostrecent.js"></script>
     <script src="js-classes/video.js"></script>
     <script src="js-classes/movie.js"></script>
     <script src="js-classes/show.js"></script>
 </head>
 <body>
-<div id="firstPanel">
     <nav id="navbar">
             <span id="logoContainer">
                 <img id="logo" src="img/logoNetflux.png" alt="">
@@ -27,6 +27,12 @@
             <button class="logButtons" type="button" id="sign-in"> Sign in </button>
         </div>
     </nav>
+
+    <div class="alerts">
+    </div>
+
+    <div id="profile-container">
+    </div>
 
     <div id="admin-panel">
         <div class="admin-form-container">
@@ -50,14 +56,20 @@
                 <input id="cover" class="content-form" type="file" name="cover">
                 <input id="upload-button" type="submit" name="submit" value="UPLOAD">
             </form>
+            <div id="loading">
+                <div id="loadingBar"></div>
+                <span id="loadingProgress"></span>
+            </div>
+        </div>
+        <div id="trash">
+            <div id="videoTrash"></div>
+            <div id="userTrash"></div>
         </div>
     </div>
 
 
-    <div class="alerts">
+    <div id="player-container">
     </div>
-
-    <div id="player-container"> </div>
 
     <div id='search-form-container'>
         <h2> SEARCH </h2>
@@ -66,7 +78,5 @@
             <button type="submit"> &#x1F50D; </button>
         </form>
     </div>
-
-</div>
 </body>
 </html>

@@ -10,9 +10,9 @@ $obj -> message = "Couldn't log you in, please verify your credentials.";
 
 $db = new Database();
 $stmt = $db->pdo()->prepare(
-    "SELECT * ".
-    "FROM USR " .
-    "WHERE USERNAME = ?");
+        "SELECT * ".
+        "FROM USR " .
+        "WHERE USERNAME = BINARY ?");
 $stmt->execute([$_POST['username']]);
 
 foreach ($stmt as $row) {

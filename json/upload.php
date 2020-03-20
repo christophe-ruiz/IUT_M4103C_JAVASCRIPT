@@ -4,6 +4,10 @@
 require_once '../php/Database.php';
 session_start();
 
+header('Cache-Control: no-cache, must-revalidate');
+header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+header('Content-type: application/json');
+
 $obj = new stdClass();
 $obj -> success = false;
 $obj -> successMsg = array();
@@ -11,44 +15,71 @@ $obj -> errorMsg = array();
 
 $db = new Database();
 
+$title = $_POST['title'];
 $author = $_POST['author'];
 $description = $_POST['description'];
-$title = $_POST['title'];
-$type = $_POST['type'];
 $year = $_POST['year'];
+$type = $_POST['type'];
 
-if (!isset($author) || !isset($description) || !isset($title) || !isset($type) || !isset($year)) {
+if (!$_SESSION['admin']) {
+    $obj -> unauthorized = "You do not have the required administration level to perform this action. This will be reported.";
+
+    $title = $_POST['title'];
+    $author = $_POST['author'];
+    $description = $_POST['description'];
+    $year = $_POST['year'];
+    $type = $_POST['type'];
+
+    $headers = array(
+        'From' => 'netflux@cruiz.fr',
+        'Reply-To' => 'netflux@cruiz.fr'
+    );
+
+    $message = "User " . $_SESSION['user'] . " attempted to access admin panel and sent a form with these informations :\n
+Title : " . $title . "\nAuthor = $author" . "\nDescription = $description" . "\nYear = $year" . "\nType = $type";
+
+    mail("chrisrz@free.fr", 'Unauthorized attempt', $message, $headers);
+
+    echo json_encode($obj);
+    exit();
+}
+
+if (!isset($author) || !isset($description) || !isset($title) || $year == 0) {
     $obj->errorMsg[] = "Couldn't process upload, please fill every fields.";
     echo json_encode($obj);
-    return;
+    exit();
 }
 if (!isset($_FILES['video']['name'])) {
     $obj->errorMsg[] = "Couldn't process upload, please select a video file";
     echo json_encode($obj);
-    return;
+    exit();
 }
 if (!isset($_FILES['cover']['name'])) {
     $obj->errorMsg[] = "Couldn't process upload, please select a cover image";
     echo json_encode($obj);
-    return;
+    exit();
 }
 
-$obj->t = $type;
+// récuperer l'extension de la video et de la photo
 $fileExt = strtolower(pathinfo(basename($_FILES['video']['name']))['extension']);
-
 $covExt = strtolower(pathinfo(basename($_FILES['cover']['name']))['extension']);
 
+$obj -> fileExt = $fileExt;
+$obj -> covExt = $covExt;
+
+//ajouter dans la bd
 try {
     $stmt = $db
         -> pdo()
-        -> prepare("INSERT INTO VIDEOS VALUES (NULL, ?, ?, ?, ?, ?, ? )")
+        -> prepare("INSERT INTO VIDEOS VALUES (NULL, ?, ?, ?, ?, ?, ?, ? )")
         -> execute([
             $type,
             $title,
             $author,
             $description,
             $year,
-            strtolower($fileExt)
+            $fileExt,
+            $covExt
         ]);
     $obj -> success = true;
     $obj -> successMsg [] =  $title . " was successfully added to the database.";
@@ -56,6 +87,7 @@ try {
     $obj -> errorMsg[] = $e -> getMessage();
 }
 
+//récupérer l'id du dernier element ajouté dans la bd
 $stmt = $db->pdo()->prepare(
     "SELECT MAX(ID) AS ID ".
     "FROM VIDEOS ");
@@ -63,14 +95,18 @@ $stmt->execute();
 
 foreach ($stmt as $row) {
     $id = $row['ID'];
+    $obj -> maxID = $id;
     break;
 }
 
+//créer le chemin de destination
 $file = '../content/' . strtolower($type) . '/' . $id . '.' . strtolower($fileExt);
 $covFile = '../covers/' . strtolower($id) . '.' . strtolower($covExt);
 
-$obj -> covExt = strtolower($fileExt);
+$obj -> fileDir = $file;
+$obj -> covDir = $covFile;
 
+//envoi de video
 if (move_uploaded_file($_FILES['video']['tmp_name'], $file)) {
     $obj->successMsg[] = $title . " was successfully uploaded.";
     $obj -> success = true;
@@ -79,10 +115,7 @@ if (move_uploaded_file($_FILES['video']['tmp_name'], $file)) {
     $obj -> success = false;
 }
 
-$covExt = strtolower(pathinfo(basename($_FILES['cover']['name']))['extension']);
-$covFile = '../covers/' . strtolower($id) . '.' . strtolower($covExt);
-$obj -> covExt = strtolower($fileExt);
-
+// envoi d'image
 if (move_uploaded_file($_FILES['cover']['tmp_name'], $covFile)) {
     $obj->successMsg[] = $title . "'s cover was successfully uploaded.";
     $obj -> successImg = true;

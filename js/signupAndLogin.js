@@ -1,4 +1,4 @@
-(function () {
+(() => {
     'use strict';
     $(() => {
         $('#sign-in-form, #sign-up-form').on('submit', function () {
@@ -11,6 +11,21 @@
                     window.location.assign('/netflux.html');
                 } else {
                     createAlert('error', data.message);
+                }
+                if (data.pwdChecks) {
+                    data.pwdChecks.forEach(msg => {
+                        createAlert('error', msg);
+                    });
+                }
+                if (data.mailChecks) {
+                    data.mailChecks.forEach(msg => {
+                        createAlert('error', msg);
+                    });
+                }
+                if (data.usrChecks) {
+                    data.usrChecks.forEach(msg => {
+                        createAlert('error', msg);
+                    });
                 }
             }).fail(function () {
                 createAlert('error', 'Fatal error !');

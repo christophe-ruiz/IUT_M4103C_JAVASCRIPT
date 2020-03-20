@@ -10,45 +10,44 @@
     <script src="js/signupAndLogin.js"></script>
     <script src="js/showForms.js"></script>
     <script src="js/alerts.js"></script>
+    <script src="js/flushMessages.js"></script>
 </head>
 <body>
-    <div id="firstPanel">
-        <nav id="navbar">
-            <span id="logoContainer">
-                <img id="logo" src="img/logoNetflux.png" alt="">
-            </span>
-            <div id="actions">
-                <button class="logButtons" type="button" id="sign-up"> Sign up </button>
-                <button class="logButtons" type="button" id="sign-in"> Sign in </button>
-            </div>
-        </nav>
-
-        <ul class="alerts">
-        </ul>
-
-        <div id='sign-up-form-container'>
-            <h2> REGISTRATION </h2>
-            <form class="logForm action-form" id="sign-up-form" action="json/signup.php" method="post" enctype="multipart/form-data">
-                <input type="text" name="username" placeholder="USERNAME">
-                <input type="password" name="pwd" placeholder="PASSWORD">
-                <input type="text" name="mail" placeholder="E-MAIL">
-                <button type="submit"> REGISTER </button>
-            </form>
+    <nav id="navbar">
+        <span id="logoContainer">
+            <img id="logo" src="img/logoNetflux.png" alt="">
+        </span>
+        <div id="actions">
+            <button class="logButtons" type="button" id="sign-up"> Sign up </button>
+            <button class="logButtons" type="button" id="sign-in"> Sign in </button>
         </div>
+    </nav>
 
-        <div id='sign-in-form-container'>
-            <h2> LOGIN </h2>
-            <form class="logForm action-form" id="sign-in-form" action="json/signin.php" method="post" enctype="multipart/form-data">
-                <input type="text" name="username" placeholder="USERNAME">
-                <input type="password" name="pwd" placeholder="PASSWORD">
-                <button type="submit"> LOGIN </button>
-            </form>
-        </div>
+    <ul class="alerts">
+    </ul>
 
-        <div class="presentation">
-            <img src="img/presentation.jpg" alt="">
-            <h1> Unlimited movies, TV shows, and more. </h1>
-        </div>
+    <div id='sign-up-form-container'>
+        <h2> REGISTRATION </h2>
+        <form class="logForm action-form" id="sign-up-form" action="json/signup.php" method="post" enctype="multipart/form-data">
+            <input type="text" name="username" placeholder="USERNAME">
+            <input type="password" name="pwd" placeholder="PASSWORD">
+            <input type="text" name="mail" placeholder="E-MAIL">
+            <button type="submit"> REGISTER </button>
+        </form>
+    </div>
+
+    <div id='sign-in-form-container'>
+        <h2> LOGIN </h2>
+        <form class="logForm action-form" id="sign-in-form" action="json/signin.php" method="post" enctype="multipart/form-data">
+            <input type="text" name="username" placeholder="USERNAME">
+            <input type="password" name="pwd" placeholder="PASSWORD">
+            <button type="submit"> LOGIN </button>
+        </form>
+    </div>
+
+    <div class="presentation">
+        <img src="img/presentation.jpg" alt="">
+        <h1> Unlimited movies, TV shows, and more. </h1>
     </div>
 </body>
 </html>

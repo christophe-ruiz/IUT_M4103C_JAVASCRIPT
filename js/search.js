@@ -1,4 +1,4 @@
-(function () {
+(() => {
     'use strict';
     $(() => {
         $('#searchForm').on('submit', function () {
@@ -6,7 +6,7 @@
                 url: $(this).attr('action'),
                 method: $(this).attr('method'),
                 data: $(this).serialize()
-            }).done(function (data) {
+            }).done((data) => {
                 let howMuchItemsWeFound = 'Found ' + data.found;
                 console.log(data);
                 if (data.message) {
@@ -32,7 +32,7 @@
                     createAlert('success', howMuchItemsWeFound);
                     data.results.forEach(result => Video.sortAndShow(result, '#results'))
                 }
-            }).fail(function () {
+            }).fail(() => {
                 createAlert('error', 'Sorry, the search function is unavailable for the moment.')
             });
             return false;

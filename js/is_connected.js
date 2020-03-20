@@ -1,4 +1,4 @@
-(function () {
+(() => {
     'use strict';
     $(() => {
         $.ajax({
@@ -31,9 +31,9 @@
                                         .slideUp(500)
                                 }
                             })
-                    )
+                    );
                 }
-                $('#test, #upload-form')
+                $('#upload-form')
                     .on('submit', function (e) {
                         e.preventDefault();
                         $.ajax({
@@ -43,22 +43,67 @@
                             data: new FormData(this),
                             contentType: false,
                             cache: false,
-                            processData:false,
+                            processData:false
                         }).done(function (data) {
-                            console.log(data);
-                            data.successMsg.forEach( msg => {
-                                createAlert('success', msg);
-                            });
-                            data.errorMsg.forEach(msg => {
-                                createAlert('error', msg);
-                            });
+                            if (data.unauthorized) {
+                                createAlert('error', data.unauthorized);
+                            }
+                            else {
+                                data.successMsg.forEach( msg => {
+                                    createAlert('success', msg);
+                                });
+                                data.errorMsg.forEach(msg => {
+                                    createAlert('error', msg);
+                                });
+                            }
                             $(this).closest('form').find("input, textarea, select").val("");
                         }).fail(function () {
                             createAlert('error', 'Fatal error !');
                         });
                         return false;
                     });
+
                 action.append(
+                    $('<button class="logButtons" type="button" id="profile"/>')
+                        .html('Profile')
+                        .on('click', function () {
+                            let self = this;
+                            $.ajax({
+                                url: '/json/profile.php',
+                                method: 'get'
+                            }).done(function (data) {
+                                console.log(data);
+                                if (data.profile) {
+                                    $('#profile-container').slideUp('fast');
+                                    $(self).html('Profile');
+                                } else {
+                                    $('#profile-container')
+                                        .empty()
+                                        .append(
+                                            $('<h2/>')  .html(data.username),
+                                            $('<span>') .html('Registered on : ' + data.date),
+                                            $('<span>') .html(data.admin),
+                                            $('<button type="button" id="trash"/>')
+                                                .html('DELETE ACCOUNT &#128465')
+                                                .on('click', function () {
+                                                    $.ajax({
+                                                        url: '/json/deleteAccount.php',
+                                                        method: 'get'
+                                                    }).done((data) => {
+                                                        if (data.success) {
+                                                            window.location.assign('/index.html');
+                                                        } else {
+                                                            createAlert('error', data.message);
+                                                        }
+                                                    })
+                                                })
+                                        )
+                                        .slideDown('fast')
+                                        .css('display', 'flex');
+                                    $(self).html('Close');
+                                }
+                            })
+                        }),
                     $('<button class="logButtons" type="button" id="logout"/>')
                         .html('Logout')
                         .on('click', function () {
@@ -66,14 +111,12 @@
                                 url: '/json/logout.php',
                                 method: 'get'
                             }).done(function () {
-                                //$('.alerts').append($('<li class="success"> ' + data.message + ' </li>'));
                                 window.location.assign('/index.html');
                             })
                         })
                 );
             } else {
                 window.location.assign('/index.html');
-                //$('.alerts').append($('<li class="error">' + data.message + '</li>'));
             }
         }).fail(function () {
             $('.alerts').append($('<li class="error"> Fatal error ! </li>'));

@@ -15,12 +15,13 @@ class Movie extends Video{
                             .append(
                                     $('<video controls>')
                                         .attr({
-                                            src : "/content/" + self.type + "/"+ self.id + "." + self.ext,
-                                            type : "/video/" + self.id + '.' + self.ext
+                                            'src' : "/content/" + self.type + "/"+ self.id + "." + self.ext,
+                                            'type' : "/video/" + self.id + '.' + self.ext
                                         })
                                         .css({
-                                            width : "60%",
-                                            border : 'solid 3px #101820'
+                                            'width' : "60%",
+                                            'border' : 'solid 3px #101820',
+                                            'max-height': '100%'
                                         })
                                 );
                     })
