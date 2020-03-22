@@ -407,6 +407,7 @@ textarea.content-form {
     border-radius: 5px;
     margin-top: 1vw;
     transition: 0.2s;
+    cursor: pointer;
 }
 
 #trash:hover {
@@ -414,4 +415,51 @@ textarea.content-form {
     transform: scale(1.1);
     color: #b60c17;
     border-color: #b60c17;
+}
+
+#confirm-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    width: 100vw;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    top: 0;
+}
+
+#confirm-container>span {
+    font-size: 4vw;
+    color: white;
+    margin-bottom: 2vw;
+}
+
+#confirm-container>div {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 30vw;
+}
+
+#confirm-container>div :first-child {
+    background: #7CCC6C;
+}
+
+#confirm-container>div :nth-child(even) {
+    background: #b60c17;
+}
+
+#confirm-container>div>button {
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    font-size: 2vw;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+#confirm-container>div button:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
 }

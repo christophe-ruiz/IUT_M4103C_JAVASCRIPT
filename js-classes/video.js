@@ -1,38 +1,56 @@
 class Video {
     constructor (m) {
-        this.n = m.name;
-        this.t = m.type;
-        this.a = m.author;
-        this.desc = m.description;
-        this.y = m.year;
-        this.c = m.id;
-        this.e = m.ext;
-        this.ce = m.covExt;
+        this._name = m.name;
+        this._type = m.type;
+        this._author = m.author;
+        this._description = m.description;
+        this._year = m.year;
+        this._id = m.id;
+        this._ext = m.ext;
+        this._covExt = m.covExt;
     }
 
     get name () {
-        return this.n;
+        return this._name;
     }
     get type () {
-        return this.t;
+        return this._type;
     }
     get author () {
-        return this.a;
+        return this._author;
     }
     get description () {
-        return this.desc;
+        return this._description;
     }
     get year () {
-        return this.y;
+        return this._year;
     }
     get id () {
-        return this.c;
+        return this._id;
     }
     get ext () {
-        return this.e;
+        return this._ext;
     }
     get covExt () {
-        return this.ce;
+        return this._covExt;
+    }
+    
+    get note () {
+        let self = this;
+        let note = 0;
+        $.ajax({
+            url : '../json/notes.php',
+            method : 'GET',
+            async : false,
+            data: 'IDV=' + self.id
+        }).done((data) => {
+            if (data.note) {
+                note = data.note;
+            }
+        }).fail(() => {
+            createAlert('error', 'Fatal error !');
+        });
+        return note;
     }
 
     static sortAndShow (v, where) {

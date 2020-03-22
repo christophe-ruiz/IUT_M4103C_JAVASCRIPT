@@ -31,27 +31,36 @@ class Movie extends Video{
                     .append(
                         $('<div class="cover-container"/>')
                             .append(
-                                $('<img src="../covers/' + this.id + '.' + this.covExt + '" alt=""/>')
+                                $('<img src="../covers/' + self.id + '.' + self.covExt + '" alt=""/>')
                             ),
                         $('<div class="movie-text"/>')
                             .append(
                                 $('<h2 class="title"/>')
-                                    .html(this.name),
+                                    .html(self.name),
                                 $('<p class="description"/>')
-                                    .html(this.description),
+                                    .html(self.description),
                                 $('<div class="more-info"/>')
                                     .append(
                                         $('<p class="description"/>')
-                                            .html(this.year),
+                                            .html(self.year),
 
                                         $('<p class="description"/>')
-                                            .html(this.author),
+                                            .html(self.author),
 
                                         $('<p class="description"/>')
-                                            .html(this.type)
+                                            .html(self.type),
+
+                                        $('<p class="description"/>')
+                                            .html(self.note),
+
+                                        // $('<div class="description"/>')
+                                        //     .append(
+                                        //         $('<p class="description"/>')
+                                        //             .html('NOTE')
+                                        //     )
                                     )
                             )
                     )
-            )
+            );
     }
 }

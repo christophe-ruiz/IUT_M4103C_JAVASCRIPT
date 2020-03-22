@@ -1,4 +1,4 @@
-(() => {
+(function () {
     'use strict';
     $(() => {
         $('#sign-in-form, #sign-up-form').on('submit', function () {

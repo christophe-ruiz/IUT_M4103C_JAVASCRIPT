@@ -56,7 +56,10 @@
                                     createAlert('error', msg);
                                 });
                             }
-                            $(this).closest('form').find("input, textarea, select").val("");
+                            $(this)
+                                .closest('form')
+                                .find("input, textarea, select")
+                                .val("");
                         }).fail(function () {
                             createAlert('error', 'Fatal error !');
                         });
@@ -86,16 +89,56 @@
                                             $('<button type="button" id="trash"/>')
                                                 .html('DELETE ACCOUNT &#128465')
                                                 .on('click', function () {
-                                                    $.ajax({
-                                                        url: '/json/deleteAccount.php',
-                                                        method: 'get'
-                                                    }).done((data) => {
-                                                        if (data.success) {
-                                                            window.location.assign('/index.html');
-                                                        } else {
-                                                            createAlert('error', data.message);
-                                                        }
-                                                    })
+                                                    let cc = $('#confirm-container');
+                                                    if (cc.length) {
+                                                        $('body')
+                                                            .css('overflow', 'hidden');
+                                                        cc
+                                                            .fadeIn('500')
+                                                            .css('display', 'flex');
+                                                    }
+                                                    else {
+                                                        $('body')
+                                                            .css('overflow', 'hidden')
+                                                            .append(
+                                                                $('<div id="confirm-container" />')
+                                                                    .fadeIn(500)
+                                                                    .css('display', 'flex')
+                                                                    .append(
+                                                                        $('<span/>')
+                                                                            .html('Are you sure about that ?'),
+                                                                        $('<div/>')
+                                                                            .append(
+                                                                                $('<button>')
+                                                                                    .attr('type', 'button')
+                                                                                    .html('YES')
+                                                                                    .on('click', function () {
+                                                                                        $('#confirm-container')
+                                                                                            .fadeOut(500);
+                                                                                        $.ajax({
+                                                                                            url: '/json/deleteAccount.php',
+                                                                                            method: 'get'
+                                                                                        }).done((data) => {
+                                                                                            if (data.success) {
+                                                                                                window.location.assign('/index.html');
+                                                                                            } else {
+                                                                                                createAlert('error', data.message);
+                                                                                            }
+                                                                                        })
+                                                                                    }),
+                                                                                $('<button/>')
+                                                                                    .attr('type', 'button')
+                                                                                    .html('NO')
+                                                                                    .on('click', function () {
+                                                                                        $('body')
+                                                                                            .css('overflow', 'auto');
+                                                                                        $('#confirm-container')
+                                                                                            .fadeOut(500);
+                                                                                    })
+                                                                            )
+                                                                    )
+                                                            );
+                                                    }
                                                 })
                                         )
                                         .slideDown('fast')
