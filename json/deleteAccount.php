@@ -12,8 +12,14 @@ $db = new Database();
 $stmt = $db->pdo()->prepare("DELETE FROM USR WHERE USERNAME = ?");
 $stmt->execute([$_SESSION['user']]);
 if ($stmt->rowCount()) {
-    $obj -> success = true;
-    $_SESSION['deleted'] = "Your account has been successfully deleted !";
+    $stmt = $db->pdo()->prepare("DELETE FROM NOTES WHERE USR = ?");
+    $stmt->execute([$_SESSION['user']]);
+    if ($stmt->rowCount()) {
+        $obj -> success = true;
+        $_SESSION['deleted'] = "Your account has been successfully deleted !";
+    } else {
+        $obj -> message = "Sorry, unable to delete your account. Please retry in a few minutes.";
+    }
 } else {
     $obj -> message = "Sorry, unable to delete your account. Please retry in a few minutes.";
 }

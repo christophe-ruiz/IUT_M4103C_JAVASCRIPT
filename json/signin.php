@@ -16,7 +16,7 @@ $stmt = $db->pdo()->prepare(
 $stmt->execute([$_POST['username']]);
 
 foreach ($stmt as $row) {
-    if ($row['PASSWORD'] == $_POST['pwd']) {
+    if (password_verify($_POST['pwd'], $row['PASSWORD'])) {
         $obj->success = true;
         $obj->message = "Welcome " . $_POST['username'] . " !";
         $_SESSION['admin'] = $row['IS_ADMIN'];

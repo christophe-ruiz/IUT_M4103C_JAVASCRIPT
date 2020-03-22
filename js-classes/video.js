@@ -10,6 +10,10 @@ class Video {
         this._covExt = m.covExt;
     }
 
+    show (where) {
+        console.log('not implemented');
+    }
+
     get name () {
         return this._name;
     }
@@ -35,22 +39,17 @@ class Video {
         return this._covExt;
     }
     
-    get note () {
+    get showNote () {
         let self = this;
-        let note = 0;
         $.ajax({
-            url : '../json/notes.php',
+            url : '../json/get_rates.php',
             method : 'GET',
-            async : false,
             data: 'IDV=' + self.id
         }).done((data) => {
-            if (data.note) {
-                note = data.note;
-            }
+            $('#note' + self.id).html(data.note + '/5.00');
         }).fail(() => {
             createAlert('error', 'Fatal error !');
         });
-        return note;
     }
 
     static sortAndShow (v, where) {
@@ -66,6 +65,7 @@ class Video {
                 covExt : v.covExt,
             });
             movie.show(where);
+            movie.showNote;
         } else if (v.type === 'SHOW') {
             let show = new Show({
                 name : v.name,
@@ -78,6 +78,7 @@ class Video {
                 covExt : v.covExt
             });
             show.show(where);
-        }        
+            show.showNote;
+        }
     }
 }

@@ -6,7 +6,7 @@
                 url: $(this).attr('action'),
                 method: $(this).attr('method'),
                 data: $(this).serialize()
-            }).done(function (data) {
+            }).done((data) => {
                 if (data.success) {
                     window.location.assign('/netflux.html');
                 } else {
@@ -27,7 +27,7 @@
                         createAlert('error', msg);
                     });
                 }
-            }).fail(function () {
+            }).fail(() => {
                 createAlert('error', 'Fatal error !');
             });
             return false;

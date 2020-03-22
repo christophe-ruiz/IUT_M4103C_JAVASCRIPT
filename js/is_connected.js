@@ -24,7 +24,7 @@
                                     createAlert('info', 'Welcome to the administration panel');
                                     $('#admin-panel')
                                         .slideDown('fast')
-                                        .css('display', 'flex')
+                                        .css('display', 'flex');
                                 } else {
                                     $(this).data('clicked', !$(this).data('clicked'));
                                     $('#admin-panel')

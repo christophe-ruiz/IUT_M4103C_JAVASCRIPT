@@ -12,7 +12,7 @@ $obj -> message = "Couldn't process registration, please fill in all fields.";
 $db = new Database();
 
 $usr = $_POST['username'];
-$pwd = $_POST['pwd'];
+$pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
 $mail = $_POST['mail'];
 
 if (empty($usr) || empty($pwd) || empty($mail) ) {
@@ -31,6 +31,13 @@ $usrTaken = $db->pdo()->query($stmt)->rowCount();
 
 if($mailTaken) {
     $obj -> mailChecks[] = "This e-mail address is already taken.";
+    $obj -> message = "Couldn't process registration";
+
+    header('Cache-Control: no-cache, must-revalidate');
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+    header('Content-type: application/json');
+    echo json_encode($obj);
+    die();
 }
 if(!preg_match('/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/', $mail)) {
     $obj -> mailChecks[] = "Your e-mail is in incorrect format.";
@@ -38,6 +45,13 @@ if(!preg_match('/^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/', $mail)) {
 
 if($usrTaken) {
     $obj -> usrChecks[] = "This username is already taken.";
+    $obj -> message = "Couldn't process registration";
+
+    header('Cache-Control: no-cache, must-revalidate');
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+    header('Content-type: application/json');
+    echo json_encode($obj);
+    die();
 }
 if(!preg_match('/.{3,}/', $usr)) {
     $obj -> usrChecks[] = "Username must be at least 3 characters long.";

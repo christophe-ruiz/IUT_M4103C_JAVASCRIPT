@@ -8,6 +8,8 @@ Le projet réalisé est une plateforme de visionnage de vidéos en ligne.
 ### Administrateur
 **USERNAME** : ***  
 **PASSWORD** : ***
+
+
 ## Utilisateur
 ### Inscription
 Pour créer un compte il faut s'incrire en appuyant sur le bouton *SIGN IN*.
@@ -18,7 +20,9 @@ Le nom d'utilisateur du compte à créer qui est une chaîne de caractères de 3
 Le mot de passe du compte à créer qui est une chaîne de caractères satisfaisant les critères suivants : 
 - Le mot de passe est composé d'au moins 8 caractères.
 - Le mot de passe est composé d'au moins une lettre majuscule.
-- Le mot de passe est composé d'au moins un caractère spécial parmis : (){}!@#$€£&*+-;,:./\ .
+- Le mot de passe est composé d'au moins un caractère spécial parmis : (){}!@#$€£&*+-;,:./\ .  
+
+Le mot de passe est chiffré avant d'être inscrit dans la base de données.
 #### MAIL
 Une adresse e-mail de format valide, c'est-à-dire :
 - Qui commence par des caractères alphanumériques, incluant des points, underscores et tirets.
@@ -37,14 +41,34 @@ recherche qui parcourt la base de données et selectionne les élements contenna
 #### U(pdate)
 Les utilisateurs peuvent noter les contenus proposés sur la plateforme et ainsi mettre à jour la note moyenne.
 
+
 ## ADMINISTRATEUR
+L'administrateur du site est un utilisateur avec des fonctionnalités supplémentaires.
 ### ADMIN PANEL
+Il existe un moyen d'accéder au panneau administrateur sans être administrateur mais effectuer une action
+sur celui-ci sans en avoir les droits déclenche un système envoyant un mail au propriétaire du site indiquant
+les informations du compte ayant effectué l'action et le contenu de ce l'opération qu'il a souhaité faire.
+![Unauthorized action img](http://m4103c.cruiz.fr/example.png "Unauthorized action")
 ### DROITS
+L'administrateur dispose des droits CRUD.  
+#### R(ead) & U(pdate)
+L'administrateur peut se comporter comme un utilisateur normal.
+#### C(reate)
+L'administrateur peut ajouter du contenu vidéos à la banque de vidéos.
+#### D(elete)
+L'administrateur peut supprimer des vidéos (et des utilisateurs).
+
 
 ## VIDEOS
 #### NOTES
+Les vidéos disposent d'une note qui est la moyenne des notes émises par les utilisateurs.  
+Une vidéo venant d'être publiée a une note de 0/5.  
+Chaque utilisateur peut donner une seule note par vidéo.  
 ### FILMS
+Les films sont des vidéos indépendantes, qui ne sont liées à aucune autre vidéo.
 ### SERIES
+Les séries sont une liste ordonnée de vidéos. À partir d'une vidéo de la liste, on peut accéder aux autres.
+
 
 
 ## Alertes

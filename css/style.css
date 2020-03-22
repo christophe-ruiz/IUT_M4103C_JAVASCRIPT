@@ -278,12 +278,14 @@ html, body {
 }
 
 .result {
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(16, 24, 32, 0.6);
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     width: 100%;
+    margin-bottom: 1vw;
 }
 
 .cover-container {
@@ -298,10 +300,6 @@ html, body {
 .cover-container>img {
     width: 100%;
     position: relative;
-}
-
-.result :nth-child(1n) {
-    color: white;
 }
 
 .movie-text {
@@ -326,8 +324,8 @@ html, body {
 
 .more-info {
     display: flex;
-    justify-content: space-evenly;
-    align-items: flex-end;
+    justify-content: space-around;
+    align-items: center;
     width: 100%;
 }
 
@@ -462,4 +460,57 @@ textarea.content-form {
 #confirm-container>div button:hover {
     transform: scale(1.1);
     transition: 0.2s;
+}
+
+.add-note {
+    width: 6vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.value {
+    width: 1.25vw;
+    border-radius: 50%;
+    text-align: center;
+    height: 1.25vw;
+}
+.minus, .plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border-radius: 50%;
+    height: 1.5vw;
+    width: 1.5vw;
+    font-size: 1vw;
+    border: white solid 1px;
+}
+
+.minus {
+    background: #b60c17;
+}
+
+.plus {
+    background: #7CCC6C;
+}
+
+.rateBtn {
+    height: 1.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px;
+    border: white 1px solid;
+    color: white;
+    background: #333F48;
+    transition: 0.2s;
+    margin-left: 1vw;
+    font-size: 1vw;
+    cursor: pointer;
+}
+
+.rateBtn:hover {
+    transition: 0.2s;
+    background: #F1B434;
 }

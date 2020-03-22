@@ -8,11 +8,18 @@ class Movie extends Video{
         $(where)
             .append(
                 $('<div class="result"/>')
-                    .on('click', function () {
-                        $('#player-container')
-                            .empty()
-                            .css('display', 'flex')
+                    .css({
+                        cursor: 'pointer'
+                    })
+                    .append(
+                        $('<div class="cover-container"/>')
                             .append(
+                                $('<img src="../covers/' + self.id + '.' + self.covExt + '" alt=""/>')
+                            ).on('click', function () {
+                            $('#player-container')
+                                .empty()
+                                .css('display', 'flex')
+                                .append(
                                     $('<video controls>')
                                         .attr({
                                             'src' : "/content/" + self.type + "/"+ self.id + "." + self.ext,
@@ -24,15 +31,7 @@ class Movie extends Video{
                                             'max-height': '100%'
                                         })
                                 );
-                    })
-                    .css({
-                        cursor: 'pointer'
-                    })
-                    .append(
-                        $('<div class="cover-container"/>')
-                            .append(
-                                $('<img src="../covers/' + self.id + '.' + self.covExt + '" alt=""/>')
-                            ),
+                        }),
                         $('<div class="movie-text"/>')
                             .append(
                                 $('<h2 class="title"/>')
@@ -50,14 +49,49 @@ class Movie extends Video{
                                         $('<p class="description"/>')
                                             .html(self.type),
 
-                                        $('<p class="description"/>')
-                                            .html(self.note),
+                                        $('<p class="description" id="note' + self.id + '"/>'),
 
-                                        // $('<div class="description"/>')
-                                        //     .append(
-                                        //         $('<p class="description"/>')
-                                        //             .html('NOTE')
-                                        //     )
+
+                                        $('<form class="add-note" action="/json/rate.php" method="GET"/>')
+                                            .append(
+                                                $('<button type="button" class="minus"/>')
+                                                    .html('-')
+                                                    .on('click', function () {
+                                                        let $value = $(this).next();
+                                                        let val = parseInt($value.val()) - 1;
+                                                        $value.val(val >= 0 ? val : 0);
+                                                    }),
+                                                $('<input type="text" name="rate" value="5" class="value"/>'),
+                                                $('<button type="button" class="plus"/>')
+                                                    .html('+')
+                                                    .on('click', function () {
+                                                        let $value = $(this).prev();
+                                                        let val = parseInt($value.val()) + 1;
+                                                        $value.val(val <= 5 ? val : 5);
+                                                    }),
+                                                $('<input type="hidden" name="video" value="' + self.id + '"/>'),
+                                                $('<button type="submit" class="rateBtn"/>')
+                                                    .html('RATE')
+                                                    .on('click', function () {
+                                                        $.ajax({
+                                                            url: $(this).parent().attr('action'),
+                                                            method: $(this).parent().attr('method'),
+                                                            data: $(this).parent().serialize()
+                                                        }).done((data) => {
+                                                            console.log(data);
+                                                            if (data.success) {
+                                                                createAlert('success', data.msg);
+                                                                self.showNote;
+                                                            }
+                                                            else {
+                                                                createAlert('error', data.msg);
+                                                            }
+                                                        }).fail(() => {
+                                                            createAlert('error', 'Fatal error !');
+                                                        });
+                                                        return false;
+                                                    })
+                                            )
                                     )
                             )
                     )
