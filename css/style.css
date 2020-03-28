@@ -203,18 +203,16 @@ html, body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    overflow: hidden;
-    position: relative;
+    /*overflow: hidden;*/
+    /*position: relative;*/
 }
 
 .presentation>h1 {
     font-size: 4vw;
     width: 50%;
     position: absolute;
-    color: #101820;
+    color: white;
     text-align: center;
-    text-shadow: 2px 0 0 white, -2px 0 0 white, 0 2px 0 white, 0 -2px 0 white,
-                 1px 1px white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white;
 
 }
 
@@ -346,9 +344,8 @@ html, body {
 
 #admin-panel {
     width : 100%;
-    justify-content : center;
+    justify-content : space-evenly;
     align-items : center;
-    flex-direction: column;
     background : #F1B434;
     display: none;
 }
@@ -380,6 +377,7 @@ textarea.content-form {
     justify-content: center;
     align-items: center;
     background: #F1B434;
+    min-height: 47vw;
 }
 
 .admin-form-title {
@@ -474,6 +472,8 @@ textarea.content-form {
     border-radius: 50%;
     text-align: center;
     height: 1.25vw;
+    padding: 0.41vw;
+    font-size: 1.2vw;
 }
 .minus, .plus {
     display: flex;
@@ -485,6 +485,7 @@ textarea.content-form {
     width: 1.5vw;
     font-size: 1vw;
     border: white solid 1px;
+    padding: 1vw;
 }
 
 .minus {
@@ -513,4 +514,56 @@ textarea.content-form {
 .rateBtn:hover {
     transition: 0.2s;
     background: #F1B434;
+}
+
+#contentConsole {
+    height: 47vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 33vw;
+}
+
+#contentConsole>div {
+    height: 50%;
+    position: relative;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#videoConsole {
+    background: #b60c17;
+}
+#userConsole {
+    background: #7CCC6C;
+}
+
+.dbElement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    width: 30vw;
+    padding-left: 1vw;
+    padding-right: 2vw;
+    height: 3vw;
+    border-bottom: 1px solid white;
+    position: relative;
+}
+
+.del {
+    cursor: pointer;
+    border-radius: 5px;
+    border: solid 1px white;
+    color: white;
+    background: #333F48;
+    height: 1.75vw;
+    width: 1.75vw;
+    font-size: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

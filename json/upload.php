@@ -9,7 +9,6 @@ header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
 header('Content-type: application/json');
 
 $obj = new stdClass();
-$obj -> success = false;
 $obj -> successMsg = array();
 $obj -> errorMsg = array();
 
@@ -64,6 +63,12 @@ if (!isset($_FILES['cover']['name'])) {
 $fileExt = strtolower(pathinfo(basename($_FILES['video']['name']))['extension']);
 $covExt = strtolower(pathinfo(basename($_FILES['cover']['name']))['extension']);
 
+if ($fileExt == 'avi') {
+    $obj->errorMsg[] = "Couldn't process upload, .avi is not supported";
+    echo json_encode($obj);
+    exit();
+}
+
 $obj -> fileExt = $fileExt;
 $obj -> covExt = $covExt;
 
@@ -81,7 +86,6 @@ try {
             $fileExt,
             $covExt
         ]);
-    $obj -> success = true;
     $obj -> successMsg [] =  $title . " was successfully added to the database.";
 } catch (mysqli_sql_exception $e) {
     $obj -> errorMsg[] = $e -> getMessage();
@@ -109,19 +113,15 @@ $obj -> covDir = $covFile;
 //envoi de video
 if (move_uploaded_file($_FILES['video']['tmp_name'], $file)) {
     $obj->successMsg[] = $title . " was successfully uploaded.";
-    $obj -> success = true;
 } else {
     $obj->errorMsg[] = $title . " upload has failed.";
-    $obj -> success = false;
 }
 
 // envoi d'image
 if (move_uploaded_file($_FILES['cover']['tmp_name'], $covFile)) {
     $obj->successMsg[] = $title . "'s cover was successfully uploaded.";
-    $obj -> successImg = true;
 } else {
     $obj->errorMsg[] = $title . "'s cover upload has failed.";
-    $obj -> successImg = false;
 }
 
 echo json_encode($obj);

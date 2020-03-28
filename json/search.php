@@ -11,7 +11,7 @@ $obj -> found = 0;
 $db = new Database();
 
 if (empty($_GET['q'])) {
-    $obj -> message = "Try looking for something that might actually exists.";
+    $obj -> message = "Try looking for something that might actually exist.";
 
     header('Cache-Control: no-cache, must-revalidate');
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');

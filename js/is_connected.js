@@ -4,7 +4,11 @@
         $.ajax({
             url: '/json/is_connected.php',
             method: 'get',
-        }).done(function (data) {
+        }).done((data) => {
+            let $mostRecent = $('#most-recent');
+            if (!$mostRecent.length) {
+                mostRecent();
+            }
             if (data.success) {
                 if (data.message !== "") {
                     createAlert('success', data.message);
@@ -25,6 +29,7 @@
                                     $('#admin-panel')
                                         .slideDown('fast')
                                         .css('display', 'flex');
+                                    getVideosAndUsers();
                                 } else {
                                     $(this).data('clicked', !$(this).data('clicked'));
                                     $('#admin-panel')
@@ -49,6 +54,11 @@
                                 createAlert('error', data.unauthorized);
                             }
                             else {
+                                let $mostRecent = $('#most-recent');
+                                if ($mostRecent.length) {
+                                    $mostRecent.remove();
+                                    mostRecent();
+                                }
                                 data.successMsg.forEach( msg => {
                                     createAlert('success', msg);
                                 });
@@ -56,6 +66,7 @@
                                     createAlert('error', msg);
                                 });
                             }
+                            console.log($(this).closest('form'));
                             $(this)
                                 .closest('form')
                                 .find("input, textarea, select")
@@ -74,71 +85,21 @@
                             $.ajax({
                                 url: '/json/profile.php',
                                 method: 'get'
-                            }).done(function (data) {
+                            }).done((data) => {
                                 console.log(data);
                                 if (data.profile) {
                                     $('#profile-container').slideUp('fast');
                                     $(self).html('Profile');
                                 } else {
-                                    $('#profile-container')
-                                        .empty()
+                                    $('#profile-container').empty()
                                         .append(
                                             $('<h2/>')  .html(data.username),
                                             $('<span>') .html('Registered on : ' + data.date),
                                             $('<span>') .html(data.admin),
                                             $('<button type="button" id="trash"/>')
-                                                .html('DELETE ACCOUNT &#128465')
-                                                .on('click', function () {
-                                                    let cc = $('#confirm-container');
-                                                    if (cc.length) {
-                                                        $('body')
-                                                            .css('overflow', 'hidden');
-                                                        cc
-                                                            .fadeIn('500')
-                                                            .css('display', 'flex');
-                                                    }
-                                                    else {
-                                                        $('body')
-                                                            .css('overflow', 'hidden')
-                                                            .append(
-                                                                $('<div id="confirm-container" />')
-                                                                    .fadeIn(500)
-                                                                    .css('display', 'flex')
-                                                                    .append(
-                                                                        $('<span/>')
-                                                                            .html('Are you sure about that ?'),
-                                                                        $('<div/>')
-                                                                            .append(
-                                                                                $('<button>')
-                                                                                    .attr('type', 'button')
-                                                                                    .html('YES')
-                                                                                    .on('click', function () {
-                                                                                        $('#confirm-container')
-                                                                                            .fadeOut(500);
-                                                                                        $.ajax({
-                                                                                            url: '/json/deleteAccount.php',
-                                                                                            method: 'get'
-                                                                                        }).done((data) => {
-                                                                                            if (data.success) {
-                                                                                                window.location.assign('/index.html');
-                                                                                            } else {
-                                                                                                createAlert('error', data.message);
-                                                                                            }
-                                                                                        })
-                                                                                    }),
-                                                                                $('<button/>')
-                                                                                    .attr('type', 'button')
-                                                                                    .html('NO')
-                                                                                    .on('click', function () {
-                                                                                        $('body')
-                                                                                            .css('overflow', 'auto');
-                                                                                        $('#confirm-container')
-                                                                                            .fadeOut(500);
-                                                                                    })
-                                                                            )
-                                                                    )
-                                                            );
-                                                    }
+                                                .html('DELETE ACCOUNT 🗑️')
+                                                .on('click', () => {
+                                                    confirmDelAccount('me')
                                                 })
                                         )
                                         .slideDown('fast')
@@ -153,7 +114,7 @@
                             $.ajax({
                                 url: '/json/logout.php',
                                 method: 'get'
-                            }).done(function () {
+                            }).done(() => {
                                 window.location.assign('/index.html');
                             })
                         })
@@ -161,7 +122,7 @@
             } else {
                 window.location.assign('/index.html');
             }
-        }).fail(function () {
+        }).fail(() => {
             $('.alerts').append($('<li class="error"> Fatal error ! </li>'));
         });
     });

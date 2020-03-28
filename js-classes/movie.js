@@ -61,7 +61,14 @@ class Movie extends Video{
                                                         let val = parseInt($value.val()) - 1;
                                                         $value.val(val >= 0 ? val : 0);
                                                     }),
-                                                $('<input type="text" name="rate" value="5" class="value"/>'),
+                                                $('<input type="text" name="rate" value="5" class="value"/>')
+                                                    .on('change', function () {
+                                                        if (parseInt($(this).val()) > 5) {
+                                                            $(this).val( 5);
+                                                        } else if (parseInt($(this).val()) < 0) {
+                                                            $(this).val( 0);
+                                                        }
+                                                    }),
                                                 $('<button type="button" class="plus"/>')
                                                     .html('+')
                                                     .on('click', function () {

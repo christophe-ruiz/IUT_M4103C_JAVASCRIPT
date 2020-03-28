@@ -1,10 +1,6 @@
 let createAlert = function (type, msg) {
     'use strict';
     let a = $('.alerts');
-    // let b = $('html, body');
-    // b.animate({
-    //     scrollTop : b.offset().top
-    // });
     a.append(
         $('<div class="' + type + '"/>')
             .append(
@@ -30,12 +26,8 @@ let createAlert = function (type, msg) {
             .fadeIn(1000)
     );
 
-    (function goAwayPls (i) {
-        let msg = $('.alerts').children().get(--i);
-        setTimeout(() => {
-            $(msg).slideUp('fast');
-            if (i <= 0) return;
-            goAwayPls(i);
-        }, 5000, msg);
-    })(a.children().length);
+    let lastMsg = a.children().get(a.children().length -1);
+    setTimeout(() => {
+        $(lastMsg).slideUp('fast');
+    }, 5000);
 };

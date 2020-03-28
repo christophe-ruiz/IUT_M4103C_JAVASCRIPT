@@ -7,7 +7,6 @@ session_start();
 
 $obj = new stdClass();
 $obj -> success = false;
-$obj -> message = "Couldn't process registration, please fill in all fields.";
 
 $db = new Database();
 

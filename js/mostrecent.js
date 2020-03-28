@@ -1,4 +1,4 @@
-(() => {
+function mostRecent () {
     $(() => {
         $.ajax({
             url: "/json/mostrecent.php",
@@ -10,7 +10,11 @@
                     .css({
                         'color' : 'white',
                         'font-size' : '5vw',
-                    })
+                    });
+                let mr = $('#most-recent');
+                if (mr.length) {
+                    $('#most-recent').empty()
+                }
                 $('#search-form-container')
                     .after(
                         $('<div id="most-recent"/>')
@@ -33,4 +37,4 @@
             createAlert('error', 'Fatal Error !')
         })
     })
-})();
+};
