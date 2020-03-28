@@ -40,9 +40,24 @@
                 }
 
                 $('#type').on('change', function () {
+                    let fe = $('#firstEp');
+                    if (fe.length) {
+                        fe.before().remove();
+                        fe.remove();
+                    }
+                    let lbl = $('#lblFirstEp');
+                    if (lbl.length) {
+                        lbl.before().remove();
+                        lbl.remove();
+                    }
+                    let s = $('#shows');
+                    if (s.length) {
+                        s.before().remove();
+                        s.remove();
+                    }
                     if ($(this).val() === 'SHOW') {
                         $(this).after(
-                            $('<label for="firstEp"/>').html('NEW SHOW'),
+                            $('<label id="lblFirstEp" for="firstEp"/>').html('NEW SHOW'),
                             $('<input id="firstEp" class="content-form" type="checkbox" name="firstEp" checked />')
                                 .on('change', function () {
                                     if (!$(this).is(':checked')) {
@@ -60,6 +75,7 @@
 
                 $('#upload-form')
                     .on('submit', function (e) {
+                        createAlert('info', 'Trying to upload content');
                         e.preventDefault();
                         $.ajax({
                             url: $(this).attr('action'),
@@ -86,7 +102,22 @@
                                     createAlert('error', msg);
                                 });
                             }
-                            $('#upload-form')[0].reset()
+                            $('#upload-form')[0].reset();
+                            let fe = $('#firstEp');
+                            if (fe.length) {
+                                fe.before().remove();
+                                fe.remove();
+                            }
+                            let lbl = $('#lblFirstEp');
+                            if (lbl.length) {
+                                lbl.before().remove();
+                                lbl.remove();
+                            }
+                            let s = $('#shows');
+                            if (s.length) {
+                                s.before().remove();
+                                s.remove();
+                            }
                         }).fail(function () {
                             createAlert('error', 'Fatal error !');
                         });

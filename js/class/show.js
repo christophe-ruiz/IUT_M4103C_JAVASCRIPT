@@ -42,6 +42,7 @@ class Show extends Video {
                         }).css( {
                             'height' : '100%',
                             'cursor' : 'pointer',
+                            'margin-right' : '1vw',
                         }),
                         $('<span>').html(vid.name),
                     ).on('click', function () {
@@ -62,6 +63,7 @@ class Show extends Video {
                         'justify-content' : 'space-evenly',
                         'align-items' : 'center',
                         'height' : '3vw',
+                        'margin-bottom' : '1vw',
                     })
                 )
             })

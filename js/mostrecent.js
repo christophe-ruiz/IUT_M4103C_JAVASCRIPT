@@ -16,8 +16,8 @@ function mostRecent () {
                 if (mr.length) {
                     $('#most-recent').empty()
                 }
-                $('#search-form-container')
-                    .after(
+                $('footer')
+                    .before(
                         $('<div id="most-recent"/>')
                             .css({
                                 'display' : 'flex',
