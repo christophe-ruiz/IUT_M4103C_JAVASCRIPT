@@ -33,6 +33,9 @@ foreach ($stmt as $row) {
         "ext" => $row['EXTENSION'],
         "covExt" => $row['COVEXT'],
     );
+    if (end($obj->results)['type'] == "SHOW") {
+        end($obj->results)["thread"] = $row["THREAD_FATHER"];
+    }
     $obj->found = ++$obj->found;
 }
 

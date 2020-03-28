@@ -10,9 +10,11 @@
                     let other = $('#sign-in');
                     $('#sign-in-form-container').slideUp('fast');
                     other.data('open', !other.data('open'));
-                    $('#sign-up-form-container').slideDown(500).css({
-                        display: 'flex'
-                    });
+                    setTimeout(() => {
+                        $('#sign-up-form-container').slideDown(500).css({
+                            display: 'flex'
+                        });
+                    }, 200)
                 } else {
                     $('#sign-up-form-container').slideDown(500).css({
                         display: 'flex'
@@ -30,9 +32,11 @@
                     let other = $('#sign-up');
                     $('#sign-up-form-container').slideUp('fast');
                     other.data('open', !other.data('open'));
-                    $('#sign-in-form-container').slideDown(500).css({
-                        display: 'flex'
-                    });
+                    setTimeout(() => {
+                        $('#sign-in-form-container').slideDown(500).css({
+                            display: 'flex'
+                        });
+                    }, 200)
                 } else {
                     $('#sign-in-form-container').slideDown(500).css({
                         display: 'flex'

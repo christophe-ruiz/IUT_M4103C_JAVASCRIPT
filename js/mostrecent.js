@@ -1,4 +1,5 @@
 function mostRecent () {
+    'use strict';
     $(() => {
         $.ajax({
             url: "/json/mostrecent.php",
@@ -37,4 +38,4 @@ function mostRecent () {
             createAlert('error', 'Fatal Error !')
         })
     })
-};
+}

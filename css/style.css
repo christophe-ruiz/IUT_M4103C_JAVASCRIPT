@@ -196,32 +196,6 @@ html, body {
     cursor: pointer;
 }
 
-.presentation {
-    background: #101820;
-    height: 85%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    /*overflow: hidden;*/
-    /*position: relative;*/
-}
-
-.presentation>h1 {
-    font-size: 4vw;
-    width: 50%;
-    position: absolute;
-    color: white;
-    text-align: center;
-
-}
-
-.presentation>img {
-    position: absolute;
-    height: 80%;
-    filter: blur(4px);
-}
-
 .alerts {
     position: fixed;
     padding: 0;
@@ -566,4 +540,59 @@ textarea.content-form {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+footer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 10vw;
+    background: #850910;
+    color: white;
+    font-size: 1.5vw;
+}
+
+.presentation {
+    display: flex;
+    flex-direction: column;
+    background: black;
+}
+
+.presentation > h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #D9D9D6;
+    background: black;
+    margin: 0;
+    font-size: 5vw;
+    padding: 2vw;
+}
+
+.presentation > div {
+    background: #D9D9D6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1vw 0;
+    border-top: dashed black 1vw;
+    border-bottom: dashed black 1vw;
+}
+
+.presentation > div > img {
+    height: 23vw;
+    margin: 2vw;
+    transition: 0.2s;
+}
+
+.presentation > div > img:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+
+.presentation > div > span {
+    font-size: 6vw;
+    color: black;
+    width: 50vw;
+    text-align: center;
 }

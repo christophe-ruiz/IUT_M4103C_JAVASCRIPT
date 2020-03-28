@@ -20,14 +20,15 @@ $description = $_POST['description'];
 $year = $_POST['year'];
 $type = $_POST['type'];
 
+if ($type == 'SHOW') {
+    $firstEp = isset($_POST['firstEp']);
+    if (!$firstEp) {
+        $father = $_POST['fatherShow'];
+    }
+}
+
 if (!$_SESSION['admin']) {
     $obj -> unauthorized = "You do not have the required administration level to perform this action. This will be reported.";
-
-    $title = $_POST['title'];
-    $author = $_POST['author'];
-    $description = $_POST['description'];
-    $year = $_POST['year'];
-    $type = $_POST['type'];
 
     $headers = array(
         'From' => 'netflux@cruiz.fr',
@@ -76,7 +77,7 @@ $obj -> covExt = $covExt;
 try {
     $stmt = $db
         -> pdo()
-        -> prepare("INSERT INTO VIDEOS VALUES (NULL, ?, ?, ?, ?, ?, ?, ? )")
+        -> prepare("INSERT INTO VIDEOS VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ? )")
         -> execute([
             $type,
             $title,
@@ -84,7 +85,8 @@ try {
             $description,
             $year,
             $fileExt,
-            $covExt
+            $covExt,
+            isset($father) ? $father : NULL
         ]);
     $obj -> successMsg [] =  $title . " was successfully added to the database.";
 } catch (mysqli_sql_exception $e) {

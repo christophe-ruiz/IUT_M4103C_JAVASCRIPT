@@ -1,4 +1,5 @@
 let getVideosAndUsers = function () {
+    'use strict';
     $.ajax({
         url : '/json/getVideosAndUsers.php',
         method : 'get',
@@ -15,7 +16,6 @@ let getVideosAndUsers = function () {
                     $('<button type="button" class="del"/>')
                         .html('🗑️')
                         .on('click', () => {
-                            console.log(usr.name);
                             confirmDelAccount (usr.name);
                         })
                 )
@@ -43,7 +43,6 @@ let getVideosAndUsers = function () {
                             $('<button type="button" class="del"/>')
                                 .html('🗑️')
                                 .on('click', () => {
-                                    console.log(vid.id);
                                     confirmDelVideo(vid.id);
                                 })
                         )
@@ -54,3 +53,22 @@ let getVideosAndUsers = function () {
         createAlert('error', 'Fatal error !');
     })
 };
+
+let getShows = function () {
+    $.ajax({
+        url: "/json/getShows.php",
+        method: "get"
+    }).done((data) => {
+        let s = $('#shows');
+        data.shows.forEach(show => {
+            s.append(
+                $('<option/>')
+                    .attr('value', show.id)
+                    .html(show.title)
+            )
+        });
+        s.children().first().attr('selected', 'selected');
+    }).fail(() => {
+        createAlert('error', 'Fatal error !');
+    })
+}

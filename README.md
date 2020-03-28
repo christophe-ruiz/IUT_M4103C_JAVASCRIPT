@@ -60,6 +60,7 @@ L'administrateur peut supprimer des vidéos (et des utilisateurs).
 
 
 ## VIDEOS
+Pour lancer une vidéo, il suffit de cliquer sur sa pochette.
 #### NOTES
 Les vidéos disposent d'une note qui est la moyenne des notes émises par les utilisateurs.  
 Une vidéo venant d'être publiée a une note de 0/5.  

@@ -38,6 +38,26 @@
                             })
                     );
                 }
+
+                $('#type').on('change', function () {
+                    if ($(this).val() === 'SHOW') {
+                        $(this).after(
+                            $('<label for="firstEp"/>').html('NEW SHOW'),
+                            $('<input id="firstEp" class="content-form" type="checkbox" name="firstEp" checked />')
+                                .on('change', function () {
+                                    if (!$(this).is(':checked')) {
+                                        $(this).after(
+                                            $('<select id="shows" class="content-form" name="fatherShow"/>')
+                                        );
+                                        getShows();
+                                    } else {
+                                        $('#shows').remove();
+                                    }
+                                })
+                        )
+                    }
+                });
+
                 $('#upload-form')
                     .on('submit', function (e) {
                         e.preventDefault();
@@ -66,11 +86,7 @@
                                     createAlert('error', msg);
                                 });
                             }
-                            console.log($(this).closest('form'));
-                            $(this)
-                                .closest('form')
-                                .find("input, textarea, select")
-                                .val("");
+                            $('#upload-form')[0].reset()
                         }).fail(function () {
                             createAlert('error', 'Fatal error !');
                         });
@@ -86,7 +102,6 @@
                                 url: '/json/profile.php',
                                 method: 'get'
                             }).done((data) => {
-                                console.log(data);
                                 if (data.profile) {
                                     $('#profile-container').slideUp('fast');
                                     $(self).html('Profile');

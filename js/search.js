@@ -8,7 +8,6 @@
                 data: $(this).serialize()
             }).done((data) => {
                 let howMuchItemsWeFound = 'Found ' + data.found;
-                console.log(data);
                 if (data.message) {
                     createAlert('error', data.message);
                 } else {

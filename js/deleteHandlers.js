@@ -1,4 +1,5 @@
 let confirmDelAccount = (who) => {
+    'use strict';
     $('body')
         .append(
             $('<div id="confirm-container" />')
@@ -64,6 +65,7 @@ let confirmDelAccount = (who) => {
 };
 
 function confirmDelVideo (which) {
+    'use strict';
     $('body')
         .css('overflow', 'hidden')
         .append(
