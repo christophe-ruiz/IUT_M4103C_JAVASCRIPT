@@ -3,10 +3,10 @@
 
 class Database
 {
-    private $host = '91.216.107.164';
-    private $db   = 'cruiz1237388';
-    private $user = 'cruiz1237388';
-    private $pass = 'bdni8pqery';
+    private $host = '****';
+    private $db   = '****';
+    private $user = '****';
+    private $pass = '****';
     private $charset = 'utf8mb4';
 
     private $pdo;
