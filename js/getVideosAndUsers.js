@@ -10,7 +10,7 @@ let getVideosAndUsers = function () {
             uc.append(
                 $('<div class="dbElement">').append(
                     $('<span>')
-                        .html(usr.name.length > 25 ? usr.name.substring(0, 22) + ('...') : usr.name),
+                        .html(usr.name.length > 13 ? usr.name.substring(0, 10) + ('...') : usr.name),
                     $('<p>')
                         .html('Registered on ' + usr.date),
                     $('<button type="button" class="del"/>')
@@ -29,7 +29,7 @@ let getVideosAndUsers = function () {
                     $('<span>')
                         .html(vid.id),
                     $('<span>')
-                        .html(vid.title),
+                        .html(vid.title.length > 25 ? vid.title.substring(0, 22) + ('...') : vid.title),
                     $('<div>')
                         .css({
                             'display' : 'flex',
