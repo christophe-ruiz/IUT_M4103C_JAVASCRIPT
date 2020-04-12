@@ -62,9 +62,12 @@ if(!preg_match('/.{3,}/', $usr)) {
 if(!preg_match('/.*[A-Z].*/', $pwd)) {
     $obj -> pwdChecks[] = "Password must contain at least one uppercase letter.";
 }
-if(!preg_match('/.*[(){}!@#$€£&*+-;,:.\\/].*/', $pwd)) {
+
+// TODO : Trouver une regex plus acceptable pour les caractères spéciaux.
+if(!preg_match('/.*\[(){}!@#$€£&*+-;,:.\\/\].*/', $pwd)) {
     $obj -> pwdChecks[] = "Password must contain at least one special character.";
 }
+
 if(!preg_match('/.{8,}/', $pwd)) {
     $obj -> pwdChecks[] = "Password must be at least 8 characters long.";
 }
