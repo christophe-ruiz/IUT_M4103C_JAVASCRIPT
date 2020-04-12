@@ -65,7 +65,7 @@ if(!preg_match('/.*[A-Z].*/', $pwd)) {
 
 // TODO : Trouver une regex plus acceptable pour les caractères spéciaux.
 if(!preg_match('/.*[\(\)\{\}\!\@\#\$\€\£\&\*\+\-\;\,\:\.].*/', $pwd)) {
-    echo "Password must contain at least one special character." ;
+    $obj -> pwdChecks[] = "Password must contain at least one special character." ;
 }
 
 if(!preg_match('/.{8,}/', $pwd)) {
