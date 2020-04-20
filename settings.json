@@ -1,12 +1,9 @@
 {
-  "ftp": {
-    "server" : "ftp.cruiz.fr",
-    "username" : "cruiz1237388",
-    "password" : "Jukilo26++"
-  },
   "db":{
+    "charset" : "utf8mb4",
     "server" : "91.216.107.164",
     "username" : "cruiz1237388",
+    "name" : "cruiz1237388",
     "password" : "bdni8pqery"
   }
 }

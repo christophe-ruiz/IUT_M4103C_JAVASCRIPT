@@ -1,17 +1,22 @@
 <?php
 
 
+require_once 'Data.php';
 class Database
 {
-    private $host = '****';
-    private $db   = '****';
-    private $user = '****';
-    private $pass = '****';
-    private $charset = 'utf8mb4';
-
     private $pdo;
+
     public function __construct() {
-        $dsn = 'mysql:host='. $this->host . ';dbname='. $this->db . ';charset='. $this->charset;
+        $data = new Data();
+        $data = $data->data()['db'];
+
+        $host = $data['server'];
+        $db = $data['name'];
+        $charset = $data['charset'];
+        $user = $data['username'];
+        $pass = $data['password'];
+
+        $dsn = 'mysql:host='. $host . ';dbname='. $db . ';charset='. $charset;
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -19,7 +24,7 @@ class Database
         ];
 
         try {
-            $this->pdo = new PDO($dsn, $this->user, $this->pass, $options);
+            $this->pdo = new PDO($dsn, $user, $pass, $options);
         } catch (PDOException $e) {
             throw new PDOException($e->getMessage(), (int)$e->getCode());
         }
@@ -28,6 +33,4 @@ class Database
     public function pdo () {
         return $this->pdo;
     }
-
-
 }
