@@ -20,7 +20,7 @@ Le nom d'utilisateur du compte à créer qui est une chaîne de caractères de 3
 Le mot de passe du compte à créer qui est une chaîne de caractères satisfaisant les critères suivants : 
 - Le mot de passe est composé d'au moins 8 caractères.
 - Le mot de passe est composé d'au moins une lettre majuscule.
-- Le mot de passe est composé d'au moins un caractère spécial parmis : (){}!@#$€£&*+-;,:./\ .  
+- Le mot de passe est composé d'au moins un caractère spécial parmis : (){}!@#$€£&*+-;,:. .
 
 Le mot de passe est chiffré avant d'être inscrit dans la base de données.
 #### MAIL

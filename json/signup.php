@@ -62,9 +62,12 @@ if(!preg_match('/.{3,}/', $usr)) {
 if(!preg_match('/.*[A-Z].*/', $pwd)) {
     $obj -> pwdChecks[] = "Password must contain at least one uppercase letter.";
 }
-if(!preg_match('/.*[(){}!@#$€£&*+-;,:.\\/].*/', $pwd)) {
-    $obj -> pwdChecks[] = "Password must contain at least one special character.";
+
+// TODO : Trouver une regex plus acceptable pour les caractères spéciaux.
+if(!preg_match('/.*[\(\)\{\}\!\@\#\$\€\£\&\*\+\-\;\,\:\.].*/', $pwd)) {
+    $obj -> pwdChecks[] = "Password must contain at least one special character." ;
 }
+
 if(!preg_match('/.{8,}/', $pwd)) {
     $obj -> pwdChecks[] = "Password must be at least 8 characters long.";
 }
@@ -72,6 +75,7 @@ if(!preg_match('/.{8,}/', $pwd)) {
 $pwd = password_hash($pwd, PASSWORD_DEFAULT);
 
 if (!isset($obj -> pwdChecks) && !isset($obj -> usrChecks) && !isset($obj -> mailChecks)) {
+    $pwd = password_hash($pwd, PASSWORD_DEFAULT);
     try {
         $stmt = $db
             -> pdo()
