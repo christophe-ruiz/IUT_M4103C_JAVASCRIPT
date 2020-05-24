@@ -60,10 +60,10 @@ class Show extends Video {
                         episode.fillPlayer();
                     }).css( {
                         'display' : 'flex',
-                        'justify-content' : 'space-evenly',
                         'align-items' : 'center',
                         'height' : '3vw',
                         'margin-bottom' : '1vw',
+                        'width' : '100%'
                     })
                 )
             })
