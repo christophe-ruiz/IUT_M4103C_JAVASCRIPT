@@ -5,7 +5,7 @@ require_once 'Data.php';
 class Database
 {
     private $pdo;
-
+//
     public function __construct() {
         $data = new Data();
         $data = $data->data()['db'];
