@@ -5,7 +5,6 @@
             url : 'json/flushMessages.php',
             method : 'get'
         }).done((data) => {
-            console.log(data);
             if (data.disconnected) {
                 createAlert('info', data.disconnected);
             }

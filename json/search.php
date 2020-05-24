@@ -4,11 +4,10 @@
 require_once '../php/Database.php';
 session_start();
 
+
 $obj = new stdClass();
 $obj -> results = [];
 $obj -> found = 0;
-
-$db = new Database();
 
 if (empty($_GET['q'])) {
     $obj -> message = "Try looking for something that might actually exist.";
@@ -20,7 +19,11 @@ if (empty($_GET['q'])) {
     echo json_encode($obj);
     return;
 }
-$stmt = $db->pdo()->query("SELECT * FROM VIDEOS WHERE TITLE LIKE '%" . $_GET['q'] . "%'");
+
+$db = new Database();
+
+$stmt = $db->pdo()->prepare("SELECT * FROM VIDEOS WHERE TITLE LIKE ?");
+$stmt->execute(["%".$_GET['q']."%"]);
 
 foreach ($stmt as $row) {
     $obj->results [] = array(
@@ -36,7 +39,7 @@ foreach ($stmt as $row) {
     if (end($obj->results)['type'] == "SHOW") {
         end($obj->results)["thread"] = $row["THREAD_FATHER"];
     }
-    $obj->found = ++$obj->found;
+    ++$obj->found;
 }
 
 header('Cache-Control: no-cache, must-revalidate');

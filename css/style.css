@@ -435,7 +435,6 @@ textarea.content-form {
 }
 
 .add-note {
-    width: 6vw;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -449,17 +448,19 @@ textarea.content-form {
     padding: 0.41vw;
     font-size: 1.2vw;
 }
+
 .minus, .plus {
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     border-radius: 50%;
-    height: 1.5vw;
-    width: 1.5vw;
+    height: 2vw;
+    width: 2vw;
     font-size: 1vw;
     border: white solid 1px;
-    padding: 1vw;
+    padding: 0;
+    margin: 0;
 }
 
 .minus {

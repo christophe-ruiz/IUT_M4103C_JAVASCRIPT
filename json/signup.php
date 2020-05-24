@@ -11,7 +11,7 @@ $obj -> success = false;
 $db = new Database();
 
 $usr = $_POST['username'];
-$pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+$pwd = $_POST['pwd'];
 $mail = $_POST['mail'];
 
 if (empty($usr) || empty($pwd) || empty($mail) ) {
@@ -68,6 +68,8 @@ if(!preg_match('/.*[(){}!@#$€£&*+-;,:.\\/].*/', $pwd)) {
 if(!preg_match('/.{8,}/', $pwd)) {
     $obj -> pwdChecks[] = "Password must be at least 8 characters long.";
 }
+
+$pwd = password_hash($pwd, PASSWORD_DEFAULT);
 
 if (!isset($obj -> pwdChecks) && !isset($obj -> usrChecks) && !isset($obj -> mailChecks)) {
     try {
